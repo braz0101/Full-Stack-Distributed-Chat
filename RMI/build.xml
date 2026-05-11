@@ -1,0 +1,41 @@
+<project name="MonProjetTP" default="all" basedir=".">
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+    <property name="dist" location="dist"/>
+    <property name="doc" location="doc"/>
+
+    <target name="init">
+        <mkdir dir="${build}"/>
+        <mkdir dir="${dist}"/>
+        <mkdir dir="${doc}"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+        <delete dir="${doc}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
+    </target>
+
+    <target name="arch" depends="compile">
+        <jar jarfile="${dist}/MonApplication.jar" basedir="${build}"/>
+    </target>
+
+    <target name="doc" depends="init">
+        <echo message="Generation de la documentation..."/>
+        <javadoc destdir="${doc}">
+            <fileset dir="${src}" includes="**/*.java"/>
+        </javadoc>
+    </target>
+
+    <target name="all">
+        <antcall target="clean"/>
+        <antcall target="init"/>
+        <antcall target="compile"/>
+        <antcall target="arch"/>
+        <antcall target="doc"/>
+    </target>
+</project>
