@@ -1,0 +1,42 @@
+<project name="ProjetRPC" default="all" basedir=".">
+    
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+    <property name="dist" location="dist"/>
+    <property name="lib" location="lib"/>
+
+    <path id="library.classpath">
+        <fileset dir="${lib}">
+            <include name="**/*.jar"/>
+            <include name="**/*.zip"/>
+        </fileset>
+    </path>
+
+    <target name="init">
+        <mkdir dir="${build}"/>
+        <mkdir dir="${dist}"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <echo message="Compilation..."/>
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="false">
+            <classpath refid="library.classpath"/>
+        </javac>
+    </target>
+
+    <target name="arch" depends="compile">
+        <jar jarfile="${dist}/AppRPC.jar" basedir="${build}"/>
+    </target>
+
+    <target name="all">
+        <antcall target="clean"/>
+        <antcall target="init"/>
+        <antcall target="compile"/>
+        <antcall target="arch"/>
+    </target>
+</project>
