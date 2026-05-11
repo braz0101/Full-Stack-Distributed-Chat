@@ -1,0 +1,13 @@
+<service name="ChatService">
+    <description>Service de Chat SOAP</description>
+    <parameter name="ServiceClass">ChatService</parameter>
+    <operation name="envoyerMessage">
+        <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+    </operation>
+    <operation name="recupererMessages">
+        <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+    </operation>
+    <operation name="effacerMessages">
+        <messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+    </operation>
+</service>
